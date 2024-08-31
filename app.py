@@ -1,7 +1,7 @@
 import scrapy
 import csv
 
-# atualização novamente no branch principal (foi nomeado de master pelo VSC)
+# branch principal, nomeado como master
 
 class Magalu(scrapy.Spider):
     name = 'm'
@@ -11,12 +11,12 @@ class Magalu(scrapy.Spider):
     }
     
     def start_requests(self):
-        yield scrapy.Request(f'https://www.magazineluiza.com.br/eletrodomesticos/l/ed/')
+        yield scrapy.Request(f'https://www.magazineluiza.com.br/celulares-e-smartphones/l/te/')
     
     def parse(self, response):
         total = response.xpath('//button[@type="next"]//ancestor::ul//li[position() = last() -1]//text()').get()
         for i in range(1, int(total) + 1):
-            yield scrapy.Request(f'https://www.magazineluiza.com.br/eletrodomesticos/l/ed/?page={i}', callback=self.parse2)
+            yield scrapy.Request(f'https://www.magazineluiza.com.br/celulares-e-smartphones/l/te/?page={i}', callback=self.parse2)
             
     def parse2(self, response):
         blocos = response.xpath('//div[@data-testid="product-list"]//li')
