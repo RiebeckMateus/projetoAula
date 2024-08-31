@@ -1,6 +1,8 @@
 import scrapy
 import csv
 
+# criação de outro branch
+
 class Magalu(scrapy.Spider):
     name = 'm'
     custom_settings = {
@@ -9,12 +11,12 @@ class Magalu(scrapy.Spider):
     }
     
     def start_requests(self):
-        yield scrapy.Request(f'https://www.magazineluiza.com.br/celulares-e-smartphones/l/te/')
+        yield scrapy.Request(f'https://www.magazineluiza.com.br/eletrodomesticos/l/ed/')
     
     def parse(self, response):
         total = response.xpath('//button[@type="next"]//ancestor::ul//li[position() = last() -1]//text()').get()
         for i in range(1, int(total) + 1):
-            yield scrapy.Request(f'https://www.magazineluiza.com.br/celulares-e-smartphones/l/te/?page={i}', callback=self.parse2)
+            yield scrapy.Request(f'https://www.magazineluiza.com.br/eletrodomesticos/l/ed/?page={i}', callback=self.parse2)
             
     def parse2(self, response):
         blocos = response.xpath('//div[@data-testid="product-list"]//li')
