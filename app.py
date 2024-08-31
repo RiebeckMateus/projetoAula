@@ -1,7 +1,7 @@
 import scrapy
 import csv
 
-# criação de outro branch
+# atualização novamente no branch principal (foi nomeado de master pelo VSC)
 
 class Magalu(scrapy.Spider):
     name = 'm'
